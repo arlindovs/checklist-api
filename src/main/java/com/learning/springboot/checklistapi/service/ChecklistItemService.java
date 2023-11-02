@@ -111,7 +111,7 @@ public class ChecklistItemService {
         );
     }
 
-    private List<ChecklistItemEntity> findAllChecklistItens(){
+    public List<ChecklistItemEntity> findAllChecklistItens(){
         return this.checklistItemRepository.findAll();
     }
 
