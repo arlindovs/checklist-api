@@ -41,7 +41,7 @@ public class ChecklistItemDTO {
     /**
      * Identificador único da categoria do item.
      */
-    private String categoryGuid;
+    private CategoryDTO category;
 
     /**
      * Converte uma entidade de item de checklist para um DTO de item de checklist.
@@ -57,7 +57,12 @@ public class ChecklistItemDTO {
                 .isCompleted(checklistItemEntity.getIsCompleted())
                 .dateEnd(checklistItemEntity.getDateEnd())
                 .datePost(checklistItemEntity.getDatePost())
-                .categoryGuid(checklistItemEntity.getCategory().getGuid())
+                .category(checklistItemEntity.getCategory() != null ?
+                        CategoryDTO.builder()
+                                .guid(checklistItemEntity.getCategory().getGuid())
+                                .name(checklistItemEntity.getCategory().getName())
+                                .build() :
+                        null)
                 .build();
 
     }

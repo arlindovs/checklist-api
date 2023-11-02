@@ -171,7 +171,7 @@ public class ChecklistItemService {
      * @throws IllegalArgumentException caso o guid esteja vazio.
      * @throws ResourceNotFoundException caso o item de checklist não seja encontrado.
      */
-    public void deleteChecklistitem(String guid){
+    public void deleteChecklistItem(String guid){
         if(!StringUtils.hasText(guid)){
             throw new IllegalArgumentException("O guid do item da checklist não pode ficar vazio");
         }
