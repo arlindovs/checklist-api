@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+/**
+ * Classe responsável por controlar as requisições relacionadas aos itens de checklist.
+ */
 @RestController("/api/v1/checklist-items")
 public class ChecklistItemController {
 
@@ -21,6 +24,10 @@ public class ChecklistItemController {
         this.checklistItemService = checklistItemService;
     }
 
+    /**
+     * Método responsável por retornar todos os itens de checklist cadastrados.
+     * @return ResponseEntity contendo a lista de itens de checklist e o status da requisição.
+     */
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ChecklistItemDTO>> getAllChecklistItems() {
 

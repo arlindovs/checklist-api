@@ -14,6 +14,9 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Classe responsável por prover serviços relacionados a entidade CategoryEntity.
+ */
 @Slf4j
 @Service
 public class CategoryService {
@@ -26,6 +29,12 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    /**
+     * Adiciona uma nova categoria.
+     * @param name Nome da categoria.
+     * @return A nova categoria adicionada.
+     * @throws IllegalArgumentException Se o nome da categoria estiver vazio.
+     */
     public CategoryEntity addNewCategory(String name){
         if(!StringUtils.hasText(name)){
             throw new IllegalArgumentException("O nome da categoria não pode ficar vazio");
@@ -40,6 +49,14 @@ public class CategoryService {
         return this.categoryRepository.save(newCategory);
     }
 
+    /**
+     * Atualiza uma categoria existente.
+     * @param guid GUID da categoria a ser atualizada.
+     * @param name Novo nome da categoria.
+     * @return A categoria atualizada.
+     * @throws IllegalArgumentException Se o GUID da categoria ou o novo nome estiverem vazios.
+     * @throws ResourceNotFoundException Se a categoria não for encontrada.
+     */
     public CategoryEntity updateCategory(String guid, String name){
         if( guid == null || !StringUtils.hasText(name)){
             throw new IllegalArgumentException("Parâmetros inválidos fornecidos para atualizar uma categoria");
@@ -56,6 +73,13 @@ public class CategoryService {
         return this.categoryRepository.save(retrievedCategory);
     }
 
+    /**
+     * Deleta uma categoria existente.
+     * @param guid GUID da categoria a ser deletada.
+     * @throws IllegalArgumentException Se o GUID da categoria estiver vazio.
+     * @throws ResourceNotFoundException Se a categoria não for encontrada.
+     * @throws CategoryServiceException Se a categoria possuir itens de lista de verificação associados.
+     */
     public void deleteCategory(String guid){
         if(!StringUtils.hasText(guid)){
             throw new IllegalArgumentException("Category guid não pode ficar vazio");
@@ -75,12 +99,23 @@ public class CategoryService {
         this.categoryRepository.delete(retrievedCategory);
     }
 
+    /**
+     * Retorna todas as categorias existentes.
+     * @return Lista de todas as categorias.
+     */
     public List<CategoryEntity> findAllCategories(){
         log.debug("Finding all categories");
 
         return this.categoryRepository.findAll();
     }
 
+    /**
+     * Retorna uma categoria existente pelo seu GUID.
+     * @param guid GUID da categoria a ser encontrada.
+     * @return A categoria encontrada.
+     * @throws IllegalArgumentException Se o GUID da categoria estiver vazio.
+     * @throws ResourceNotFoundException Se a categoria não for encontrada.
+     */
     public CategoryEntity findCategoryByGuid(String guid){
         if(!StringUtils.hasText(guid)){
             throw new IllegalArgumentException("Category guid não pode ficar vazio");
