@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 @Data
 @Entity(name = "ChecklistItem")
@@ -23,8 +23,8 @@ public class ChecklistItemEntity extends BaseEntity {
 
     private String description;
     private Boolean isCompleted;
-    private LocalTime dateEnd;
-    private LocalTime datePost;
+    private LocalDate dateEnd;
+    private LocalDate datePost;
 
     @ManyToOne
     private CategoryEntity category;
