@@ -1,11 +1,14 @@
 package com.learning.springboot.checklistapi.repository;
 
 import com.learning.springboot.checklistapi.entity.CategoryEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface CategoryRepository extends PagingAndSortingRepository<CategoryEntity, Long> {
+@Repository
+public interface CategoryRepository extends PagingAndSortingRepository<CategoryEntity, Long>, JpaRepository<CategoryEntity, Long> {
 
     Optional<CategoryEntity> findByName(String name);
     Optional<CategoryEntity> findByGuid(String guid);
