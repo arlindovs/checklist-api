@@ -3,9 +3,11 @@ package com.learning.springboot.checklistapi.controller;
 import com.learning.springboot.checklistapi.dto.CategoryDTO;
 import com.learning.springboot.checklistapi.entity.CategoryEntity;
 import com.learning.springboot.checklistapi.service.CategoryService;
+import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +66,10 @@ public class CategoryController {
      */
     @PutMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateCategory(@RequestBody CategoryDTO categoryDTO) {
+
+        if(!StringUtils.hasText(categoryDTO.getGuid())){
+            throw new ValidationException("Categoria não pode ser null ou vazio");
+        }
 
         this.categoryService.updateCategory(categoryDTO.getGuid(), categoryDTO.getName());
 

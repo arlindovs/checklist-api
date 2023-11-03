@@ -1,6 +1,8 @@
 package com.learning.springboot.checklistapi.dto;
 
 import com.learning.springboot.checklistapi.entity.ChecklistItemEntity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,16 +23,19 @@ public class ChecklistItemDTO {
     /**
      * Descrição do item.
      */
+    @NotBlank(message = "Descrição do checklist não pode ser null ou vazio")
     private String description;
 
     /**
      * Indica se o item foi concluído.
      */
+    @NotNull(message = "Completado é obrigatório")
     private Boolean isCompleted;
 
     /**
      * Data de término do item.
      */
+    @NotNull(message = "Data Fim é obrigatório")
     private LocalDate dateEnd;
 
     /**
