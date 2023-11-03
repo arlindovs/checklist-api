@@ -51,7 +51,7 @@ public class ChecklistItemController {
      * @param checklistItemDTO - DTO com as informações do item de checklist a ser criado.
      * @return ResponseEntity<String> - GUID do item de checklist criado.
      */
-    @PostMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createNewChecklistItem(@RequestBody ChecklistItemDTO checklistItemDTO) {
 
         if(checklistItemDTO.getCategory() == null) {
@@ -80,7 +80,7 @@ public class ChecklistItemController {
             throw new ValidationException("Checklist item guid é obrigatorio.");
         }
 
-        ChecklistItemEntity updatedChecklistItem = this.checklistItemService.updateChecklistItem(
+        this.checklistItemService.updateChecklistItem(
                 checklistItemDTO.getGuid(),
                 checklistItemDTO.getDescription(),
                 checklistItemDTO.getIsCompleted(),

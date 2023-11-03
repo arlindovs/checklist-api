@@ -12,7 +12,7 @@ public class CategoryDTO {
 
     private String guid;
 
-    @NotBlank(message = "Category name cannot be either null or empty")
+    @NotBlank(message = "Category name não pode ser null ou vazio")
     private String name;
 
     public static CategoryDTO toDTO(CategoryEntity categoryEntity){
