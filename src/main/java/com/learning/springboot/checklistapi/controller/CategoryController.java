@@ -1,6 +1,7 @@
 package com.learning.springboot.checklistapi.controller;
 
 import com.learning.springboot.checklistapi.dto.CategoryDTO;
+import com.learning.springboot.checklistapi.dto.NewResourceDTO;
 import com.learning.springboot.checklistapi.entity.CategoryEntity;
 import com.learning.springboot.checklistapi.service.CategoryService;
 import jakarta.validation.ValidationException;
@@ -52,11 +53,11 @@ public class CategoryController {
      * @return ResponseEntity<String> - GUID da nova categoria.
      */
     @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addNewCategory(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<NewResourceDTO> addNewCategory(@RequestBody CategoryDTO categoryDTO) {
 
         CategoryEntity newCategory = this.categoryService.addNewCategory(categoryDTO.getName());
 
-        return new ResponseEntity<>(newCategory.getGuid(), HttpStatus.CREATED);
+        return new ResponseEntity<>(new NewResourceDTO(newCategory.getGuid()), HttpStatus.CREATED);
     }
 
     /**

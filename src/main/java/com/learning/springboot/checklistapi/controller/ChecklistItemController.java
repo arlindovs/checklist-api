@@ -1,6 +1,7 @@
 package com.learning.springboot.checklistapi.controller;
 
 import com.learning.springboot.checklistapi.dto.ChecklistItemDTO;
+import com.learning.springboot.checklistapi.dto.NewResourceDTO;
 import com.learning.springboot.checklistapi.entity.ChecklistItemEntity;
 import com.learning.springboot.checklistapi.service.ChecklistItemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -68,7 +69,7 @@ public class ChecklistItemController {
             @ApiResponse(responseCode = "500", description = "Erro interno.")
     })
     @PostMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createNewChecklistItem(@RequestBody ChecklistItemDTO checklistItemDTO) {
+    public ResponseEntity<NewResourceDTO> createNewChecklistItem(@RequestBody ChecklistItemDTO checklistItemDTO) {
 
         if(checklistItemDTO.getCategory() == null) {
             throw new ValidationException("Categoria não informada.");
@@ -80,7 +81,7 @@ public class ChecklistItemController {
                 checklistItemDTO.getCategory().getGuid()
         );
 
-        return new ResponseEntity<>(newChecklistItem.getGuid(), HttpStatus.CREATED);
+        return new ResponseEntity<>(new NewResourceDTO(newChecklistItem.getGuid()), HttpStatus.CREATED);
 
     }
 
