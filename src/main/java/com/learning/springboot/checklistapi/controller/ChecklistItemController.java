@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,7 +24,8 @@ import java.util.stream.StreamSupport;
 /**
  * Classe responsável por controlar as requisições relacionadas aos itens de checklist.
  */
-@RestController("/api/v1/checklist-items")
+@RestController
+@RequestMapping("/api/v1/checklist-items")
 public class ChecklistItemController {
 
     private final ChecklistItemService checklistItemService;
