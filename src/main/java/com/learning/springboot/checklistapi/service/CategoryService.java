@@ -58,7 +58,7 @@ public class CategoryService {
      * @throws ResourceNotFoundException Se a categoria não for encontrada.
      */
     public CategoryEntity updateCategory(String guid, String name){
-        if( guid == null || !StringUtils.hasText(name)){
+        if( !StringUtils.hasText(guid) || !StringUtils.hasText(name)){
             throw new IllegalArgumentException("Parâmetros inválidos fornecidos para atualizar uma categoria");
         }
 

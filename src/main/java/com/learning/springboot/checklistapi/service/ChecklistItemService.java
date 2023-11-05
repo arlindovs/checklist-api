@@ -31,6 +31,9 @@ public class ChecklistItemService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    public ChecklistItemService(ChecklistItemRepository checklistItemRepository, CategoryRepository categoryRepository) {
+    }
+
     /**
      * Método responsável por validar os dados de um item de checklist.
      *
