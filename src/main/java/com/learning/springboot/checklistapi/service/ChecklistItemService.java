@@ -131,6 +131,7 @@ public class ChecklistItemService {
         checklistItemEntity.setDateEnd(dateEnd);
         checklistItemEntity.setDatePost(LocalDate.now());
         checklistItemEntity.setCategory(retrievedCategory);
+        checklistItemEntity.setIsCompleted(isCompleted);
 
         log.debug("Adding a new checklist item [ checklistItem = {} ]", checklistItemEntity);
 
@@ -183,5 +184,21 @@ public class ChecklistItemService {
         log.debug("Deleting checklist item [ guid = {} ]", guid);
 
         this.checklistItemRepository.delete(retrievedItem);
+    }
+
+    public void updateIsCompleteStatus(String guid, Boolean isComplete) {
+        if(!StringUtils.hasText(guid)){
+            throw new IllegalArgumentException("O guid do item da checklist não pode ficar vazio");
+        }
+
+        ChecklistItemEntity retrievedItem = this.checklistItemRepository.findByGuid(guid).orElseThrow(
+                () -> new ResourceNotFoundException("Item da checklist não encontrado")
+        );
+
+        log.debug("Updating checklist item completed status [ guid = {}, isComplete = {} ]", guid, isComplete);
+
+        retrievedItem.setIsCompleted(isComplete);
+
+        this.checklistItemRepository.save(retrievedItem);
     }
 }

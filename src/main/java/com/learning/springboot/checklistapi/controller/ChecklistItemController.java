@@ -2,6 +2,7 @@ package com.learning.springboot.checklistapi.controller;
 
 import com.learning.springboot.checklistapi.dto.ChecklistItemDTO;
 import com.learning.springboot.checklistapi.dto.NewResourceDTO;
+import com.learning.springboot.checklistapi.dto.UpdateStatusDTO;
 import com.learning.springboot.checklistapi.entity.ChecklistItemEntity;
 import com.learning.springboot.checklistapi.service.ChecklistItemService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -95,7 +97,7 @@ public class ChecklistItemController {
             @ApiResponse(responseCode = "200", description = "Itens de checklist atualizado com sucesso."),
             @ApiResponse(responseCode = "500", description = "Erro interno.")
     })
-    @PutMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateChecklistItem(@RequestBody ChecklistItemDTO checklistItemDTO) {
 
         if(!StringUtils.hasText(checklistItemDTO.getGuid())) {
@@ -107,7 +109,7 @@ public class ChecklistItemController {
                 checklistItemDTO.getDescription(),
                 checklistItemDTO.getIsCompleted(),
                 checklistItemDTO.getDateEnd(),
-                checklistItemDTO.getCategory() != null ? checklistItemDTO.getCategory().getGuid() : null
+                checklistItemDTO.getCategory() != null ? checklistItemDTO.getGuid() : null
         );
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -124,9 +126,15 @@ public class ChecklistItemController {
             @ApiResponse(responseCode = "204", description = "Itens de checklist deletado com sucesso."),
             @ApiResponse(responseCode = "500", description = "Erro interno.")
     })
-    @DeleteMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deteleChecklistItem(@PathVariable String guid){
+    @DeleteMapping(value="{guid}")
+    public ResponseEntity<Void> deleteChecklistItem(@PathVariable String guid){
         this.checklistItemService.deleteChecklistItem(guid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping(value="{guid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateCompletedStatus(@PathVariable String guid, @RequestBody UpdateStatusDTO status){
+        this.checklistItemService.updateIsCompleteStatus(guid, status.isComplete);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

@@ -11,8 +11,8 @@ import java.time.LocalDate;
 /**
  * Classe DTO que representa um item de checklist.
  */
-@Builder
 @Getter
+@Builder
 public class ChecklistItemDTO {
 
     /**
@@ -38,10 +38,8 @@ public class ChecklistItemDTO {
     @NotNull(message = "Data Fim é obrigatório")
     private LocalDate dateEnd;
 
-    /**
-     * Data de postagem do item.
-     */
     private LocalDate datePost;
+
 
     /**
      * Identificador único da categoria do item.

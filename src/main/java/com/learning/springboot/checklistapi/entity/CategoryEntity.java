@@ -10,12 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
-
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity(name = "Category")
 @Table(indexes = { @Index(name = "IDX_GUID_CAT", columnList = "guid") })
 public class CategoryEntity extends BaseEntity {
