@@ -40,7 +40,7 @@ public class ChecklistApiApplication {
 				registry.addMapping("/**")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowedHeaders("Origin","X-Requested-With", "Content-Type", "Accept", "Authorization")
-						.allowedOrigins("http://localhost:4200");
+						.allowedOrigins("http://checklist-spa.s3-website-sa-east-1.amazonaws.com");
 			}
 		};
 	}
