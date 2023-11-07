@@ -1,8 +1,10 @@
+server:
+  port: 5000
 spring:
   datasource:
-    url: ${RDS_DB_URL}
-    username: ${RDS_USERNAME}
-    password: ${RDS_PASSWORD}
+    url: jdbc:mysql://awseb-e-svvehgihfq-stack-awsebrdsdatabase-df2honygjzdx.cf4wunysxb3j.sa-east-1.rds.amazonaws.com:3306/ebdb
+    username: admin
+    password: arlindoAPI789
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
